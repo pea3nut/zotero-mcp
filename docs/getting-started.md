@@ -305,42 +305,15 @@ autohand mcp add zotero env ZOTERO_LOCAL=true zotero-mcp
 
 Add `--scope project` after `add` to keep the server configuration in the current project. For hybrid or web API access, add the credentials described above to the `env` command. See [Autohand Code](https://github.com/autohandai/code-cli/) for current installation and CLI details.
 
-## Registering in Cursor, Codex, or Gemini CLI
-
-For the MCP route, [agent-add](https://github.com/pea3nut/agent-add) can write one
-server definition to different clients' configuration files. Install Zotero MCP
-and enable Zotero's local API as described above, then save this as
-`zotero.mcp.json` in your working project:
-
-```json
-{
-  "mcpServers": {
-    "zotero": {
-      "command": "zotero-mcp",
-      "args": ["serve", "--transport", "stdio"],
-      "env": {
-        "ZOTERO_LOCAL": "true"
-      }
-    }
-  }
-}
-```
-
-With Node.js 18+ installed, run from that project:
-
-```bash
-npx -y agent-add@1.3.1 --host cursor --mcp ./zotero.mcp.json
-```
-
-Use `--host codex` or `--host gemini` for those clients. The default scope is the
-current project; add `--global` for user scope. If your client cannot find
-`zotero-mcp`, replace `command` with its absolute path from `zotero-mcp setup-info`.
-Restart the client and verify it connects to Zotero. This registers the MCP
-server; the skill-based CLI route described above is a separate alternative.
-
 ## Using with Other MCP Clients
 
-Zotero MCP works with any MCP-compatible client. You can start the server manually:
+Zotero MCP works with any MCP-compatible client. To register the local server with [Agent Add](https://github.com/pea3nut/agent-add) (Node.js 18+), run the following and select your client when prompted:
+
+```bash
+npx -y agent-add --mcp '{"zotero":{"command":"zotero-mcp","env":{"ZOTERO_LOCAL":"true"}}}'
+```
+
+You can also start the server manually:
 
 ```bash
 zotero-mcp serve --transport stdio
