@@ -310,7 +310,7 @@ Add `--scope project` after `add` to keep the server configuration in the curren
 Zotero MCP works with any MCP-compatible client. To register the local server with [Agent Add](https://github.com/pea3nut/agent-add) (Node.js 18+), run the following and select your client when prompted:
 
 ```bash
-npx -y agent-add --mcp '{"zotero":{"command":"zotero-mcp","env":{"ZOTERO_LOCAL":"true"}}}'
+npx -y agent-add --global --mcp '{"zotero":{"command":"zotero-mcp","env":{"ZOTERO_LOCAL":"true"}}}'
 ```
 
 You can also start the server manually:
